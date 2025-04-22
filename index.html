@@ -7,24 +7,47 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    // Apply saved theme preference early to avoid flash
+    (function(){
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <style>
+    /* ──────────  COLOR THEMES  ────────── */
     :root{
       --primary:#2c66ff;          /* brand blue */
       --secondary:#6941c6;        /* brand purple */
-      --bg:#fff;
-      --text:#111;
+      --bg:#ffffff;               /* light background */
+      --surface:#f9fafe;          /* light surface */
+      --text:#111111;             /* light text */
+      --text-muted:#555555;
     }
+    [data-theme="dark"]{
+      --primary:#7da2ff;
+      --secondary:#9d7dff;
+      --bg:#0f1117;
+      --surface:#1a1d24;
+      --text:#f2f4ff;
+      --text-muted:#a0a4b8;
+    }
+
     *{box-sizing:border-box;}
     body{margin:0;font-family:'Inter',system-ui,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);}
 
     /* ──────────  NAV  ────────── */
-    .navbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;position:sticky;top:0;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.05);z-index:999;}
+    .navbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;position:sticky;top:0;background:var(--surface);box-shadow:0 2px 4px rgba(0,0,0,.05);z-index:999;}
     .navbar .brand{font-weight:700;font-size:1.2rem;color:var(--primary);text-decoration:none;}
-    .nav-links a{margin-left:1.5rem;font-weight:500;color:#555;text-decoration:none;}
+    .theme-toggle{background:none;border:none;color:var(--text);font-size:1.2rem;cursor:pointer;margin-left:1.5rem;display:flex;align-items:center;}
+    .theme-toggle:hover{color:var(--primary);}
+    .nav-links a{margin-left:1.5rem;font-weight:500;color:var(--text-muted);text-decoration:none;}
     .nav-links a:hover{color:var(--primary);}
 
     /* ──────────  HERO  ────────── */
-    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;}
+    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-bottom-left-radius:50% 5%;border-bottom-right-radius:50% 5%;}
     .hero h1{margin:0;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;}
     .hero p{font-size:1.25rem;max-width:800px;margin:1.25rem 0 2.5rem;line-height:1.5;}
     .cta-buttons a{display:inline-block;margin:0 .5rem;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;transition:background .2s,color .2s,box-shadow .2s;}
@@ -34,24 +57,28 @@
     .cta-buttons .secondary:hover{background:rgba(255,255,255,.1);}
 
     /* ──────────  STATS  ────────── */
-    .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;padding:4rem 1rem;background:#f8f9fb;}
+    .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;padding:4rem 1rem;background:var(--surface);}
     .stat{text-align:center;max-width:180px;}
     .stat h3{margin:0;font-size:2rem;font-weight:700;color:var(--primary);}
     .stat p{margin:.25rem 0 0;color:#555;}
 
     /* ──────────  FEATURES  ────────── */
     .features{max-width:1000px;margin:4rem auto;padding:0 1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
-    .feature-card{border:1px solid #e2e2e9;border-radius:12px;padding:2rem;background:#fff;transition:box-shadow .2s,transform .2s;}
+    .feature-card{border:1px solid rgba(0,0,0,.05);border-radius:12px;padding:2rem;background:var(--bg);transition:box-shadow .2s,transform .2s;}
     .feature-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px);}
     .feature-card h4{margin-top:0;color:var(--primary);font-weight:600;}
     .feature-card p{margin:.5rem 0 0;color:#555;}
 
     /* ──────────  CODE  ────────── */
-    .code-section{text-align:center;padding:4rem 1rem;background:#f5f7ff;}
+    .code-section{text-align:center;padding:4rem 1rem;background:var(--surface);}
     .code-section pre{background:#272822;color:#f8f8f2;display:inline-block;padding:1rem 1.5rem;border-radius:8px;font-family:'Courier New',monospace;font-size:1rem;margin:0;}
 
+    /* ──────────  JOIN US  ────────── */
+    .join-us{text-align:center;padding:4rem 1rem;}
+    .join-us h2{margin-top:0;font-size:2rem;font-weight:700;color:var(--primary);}
+
     /* ──────────  FOOTER  ────────── */
-    footer{text-align:center;padding:3rem 1rem;font-size:.875rem;color:#777;border-top:1px solid #eee;}
+    footer{text-align:center;padding:3rem 1rem;font-size:.875rem;color:var(--text-muted);border-top:1px solid rgba(0,0,0,.05);}
 
     /* ──────────  RESPONSIVE TWEAKS  ────────── */
     @media(max-width:600px){
@@ -62,11 +89,12 @@
 <body>
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar">
-    <a href="#" class="brand">PrismML</a>
+    <a href="#" class="brand" style="display:flex;align-items:center;"><img src="prism.jpg" alt="PrismML Logo" style="height:32px;margin-right:.5rem;border-radius:4px;">PrismML</a>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="https://github.com/PrismML" target="_blank" rel="noopener">GitHub</a>
-      <a href="#">Contact</a>
+      <a href="#join">Join Us</a>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">🌙</button>
     </div>
   </nav>
 
@@ -75,7 +103,7 @@
     <h1>Ultra‑Efficient Foundation Models</h1>
     <p>50 × pruning, 1‑bit quantization, trained‑from‑scratch models that preserve accuracy while slashing FLOPs and memory.</p>
     <div class="cta-buttons">
-      <a href="https://pypi.org/project/prismml" class="primary" target="_blank" rel="noopener">pip install prismml</a>
+      <a href="#join" class="primary">Join Us</a>
       <a href="https://github.com/PrismML" class="secondary" target="_blank" rel="noopener">View on GitHub</a>
     </div>
   </header>
@@ -116,13 +144,35 @@
     </div>
   </section>
 
-  <!-- ===== CODE SNIPPET ===== -->
-  <section class="code-section">
-    <pre><code>$ pip install prismml
-$ prismml infer --model lean‑7b --input text.txt</code></pre>
+  <!-- ===== JOIN US ===== -->
+  <section id="join" class="join-us">
+    <h2>Join Us</h2>
+    <p>We're hiring researchers and engineers who love efficient ML.</p>
+    <p>Send a short note and resume to <a href="mailto:tiny.prism.ml@gmail.com">tiny.prism.ml@gmail.com</a>.</p>
+    <div class="cta-buttons">
+      <a href="mailto:tiny.prism.ml@gmail.com" class="primary">Apply via Email</a>
+    </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
   <footer>© 2025 PrismML · All rights reserved</footer>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    if(toggleBtn){
+      const updateIcon = () => {
+        const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+        toggleBtn.textContent = isDark ? '☀️' : '🌙';
+      };
+      updateIcon();
+      toggleBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcon();
+      });
+    }
+  </script>
 </body>
 </html> 
