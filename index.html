@@ -23,6 +23,8 @@
       --secondary:#6941c6;        /* brand purple */
       --bg:#ffffff;               /* light background */
       --surface:#f9fafe;          /* light surface */
+      --card-bg:#ffffff;         /* light card */
+      --card-border:rgba(0,0,0,.06);
       --text:#111111;             /* light text */
       --text-muted:#555555;
     }
@@ -31,6 +33,8 @@
       --secondary:#9d7dff;
       --bg:#0f1117;
       --surface:#1a1d24;
+      --card-bg:#14171f;
+      --card-border:rgba(255,255,255,.05);
       --text:#f2f4ff;
       --text-muted:#a0a4b8;
     }
@@ -64,7 +68,7 @@
 
     /* ──────────  FEATURES  ────────── */
     .features{max-width:1000px;margin:4rem auto;padding:0 1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
-    .feature-card{border:1px solid rgba(0,0,0,.05);border-radius:12px;padding:2rem;background:var(--bg);transition:box-shadow .2s,transform .2s;}
+    .feature-card{border:1px solid var(--card-border);border-radius:12px;padding:2rem;background:var(--card-bg);transition:box-shadow .2s,transform .2s;}
     .feature-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px);}
     .feature-card h4{margin-top:0;color:var(--primary);font-weight:600;}
     .feature-card p{margin:.5rem 0 0;color:#555;}
@@ -74,7 +78,7 @@
     .code-section pre{background:#272822;color:#f8f8f2;display:inline-block;padding:1rem 1.5rem;border-radius:8px;font-family:'Courier New',monospace;font-size:1rem;margin:0;}
 
     /* ──────────  JOIN US  ────────── */
-    .join-us{text-align:center;padding:4rem 1rem;}
+    .join-us{text-align:center;padding:4rem 1rem;background:var(--surface);}
     .join-us h2{margin-top:0;font-size:2rem;font-weight:700;color:var(--primary);}
 
     /* ──────────  FOOTER  ────────── */
@@ -107,6 +111,11 @@
       <a href="https://github.com/PrismML" class="secondary" target="_blank" rel="noopener">View on GitHub</a>
     </div>
   </header>
+
+  <!-- ===== WAVE SEPARATOR ===== -->
+  <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;height:60px;width:100%;margin-top:-1px;fill:var(--surface);">
+    <path d="M0 0h1440v26c-120 18-240 27-360 27S720 44 600 44 360 35 240 35 120 44 0 44Z"/>
+  </svg>
 
   <!-- ===== STATS ===== -->
   <section class="stats">
