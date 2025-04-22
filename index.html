@@ -3,38 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <title>PrismML | Ultra‑Efficient Foundation Models</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body{font-family:system-ui,Helvetica,Arial,sans-serif;margin:0;padding:0;color:#111;background:#fff;}
-    header{padding:4rem 2rem;text-align:center;background:#f5f5f8;}
-    h1{margin:0;font-size:3rem;font-weight:700;}
-    h2{font-weight:400;color:#555;}
-    section{max-width:840px;margin:4rem auto;padding:0 1rem;line-height:1.6;}
-    code{background:#eef;border-radius:3px;padding:0.1em 0.3em;}
-    footer{padding:2rem 0;text-align:center;font-size:0.85rem;color:#777;border-top:1px solid #eee;}
+    :root{
+      --primary:#2c66ff;          /* brand blue */
+      --secondary:#6941c6;        /* brand purple */
+      --bg:#fff;
+      --text:#111;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Inter',system-ui,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);}
+
+    /* ──────────  NAV  ────────── */
+    .navbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;position:sticky;top:0;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.05);z-index:999;}
+    .navbar .brand{font-weight:700;font-size:1.2rem;color:var(--primary);text-decoration:none;}
+    .nav-links a{margin-left:1.5rem;font-weight:500;color:#555;text-decoration:none;}
+    .nav-links a:hover{color:var(--primary);}
+
+    /* ──────────  HERO  ────────── */
+    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;}
+    .hero h1{margin:0;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;}
+    .hero p{font-size:1.25rem;max-width:800px;margin:1.25rem 0 2.5rem;line-height:1.5;}
+    .cta-buttons a{display:inline-block;margin:0 .5rem;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;transition:background .2s,color .2s,box-shadow .2s;}
+    .cta-buttons .primary{background:#fff;color:var(--primary);}
+    .cta-buttons .primary:hover{box-shadow:0 4px 12px rgba(0,0,0,.15);}
+    .cta-buttons .secondary{background:transparent;color:#fff;border:2px solid #fff;}
+    .cta-buttons .secondary:hover{background:rgba(255,255,255,.1);}
+
+    /* ──────────  STATS  ────────── */
+    .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;padding:4rem 1rem;background:#f8f9fb;}
+    .stat{text-align:center;max-width:180px;}
+    .stat h3{margin:0;font-size:2rem;font-weight:700;color:var(--primary);}
+    .stat p{margin:.25rem 0 0;color:#555;}
+
+    /* ──────────  FEATURES  ────────── */
+    .features{max-width:1000px;margin:4rem auto;padding:0 1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+    .feature-card{border:1px solid #e2e2e9;border-radius:12px;padding:2rem;background:#fff;transition:box-shadow .2s,transform .2s;}
+    .feature-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px);}
+    .feature-card h4{margin-top:0;color:var(--primary);font-weight:600;}
+    .feature-card p{margin:.5rem 0 0;color:#555;}
+
+    /* ──────────  CODE  ────────── */
+    .code-section{text-align:center;padding:4rem 1rem;background:#f5f7ff;}
+    .code-section pre{background:#272822;color:#f8f8f2;display:inline-block;padding:1rem 1.5rem;border-radius:8px;font-family:'Courier New',monospace;font-size:1rem;margin:0;}
+
+    /* ──────────  FOOTER  ────────── */
+    footer{text-align:center;padding:3rem 1rem;font-size:.875rem;color:#777;border-top:1px solid #eee;}
+
+    /* ──────────  RESPONSIVE TWEAKS  ────────── */
+    @media(max-width:600px){
+      .nav-links{display:none;} /* hide nav links on small screens to keep it minimal */
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>PrismML</h1>
-    <h2>50 × structured & unstructured pruning | 1‑bit quantization | trained from scratch</h2>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <a href="#" class="brand">PrismML</a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="https://github.com/PrismML" target="_blank" rel="noopener">GitHub</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <h1>Ultra‑Efficient Foundation Models</h1>
+    <p>50 × pruning, 1‑bit quantization, trained‑from‑scratch models that preserve accuracy while slashing FLOPs and memory.</p>
+    <div class="cta-buttons">
+      <a href="https://pypi.org/project/prismml" class="primary" target="_blank" rel="noopener">pip install prismml</a>
+      <a href="https://github.com/PrismML" class="secondary" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
   </header>
 
-  <section>
-    <p><strong>Mission.</strong> We build lean foundation models that preserve accuracy while slashing FLOPs and memory.</p>
-
-    <h3>Our recipe</h3>
-    <ul>
-      <li><b>Structured pruning.</b> Block‑sparse kernels for predictable speed‑ups on GPU/TPU.</li>
-      <li><b>Unstructured pruning.</b> Magnitude‑ and saliency‑based masks to reach 50 × parameter reduction.</li>
-      <li><b>1‑bit quantization.</b> XNOR‑GEMM friendly weights with learned per‑channel scaling.</li>
-      <li><b>Scratch training.</b> No catastrophic forgetting—models converge directly in the compressed regime.</li>
-    </ul>
-
-    <h3>Try it</h3>
-    <pre><code>pip install prismml</code></pre>
+  <!-- ===== STATS ===== -->
+  <section class="stats">
+    <div class="stat">
+      <h3>50×</h3>
+      <p>Parameter reduction</p>
+    </div>
+    <div class="stat">
+      <h3>1‑bit</h3>
+      <p>Weight precision</p>
+    </div>
+    <div class="stat">
+      <h3>∞</h3>
+      <p>Research possibilities</p>
+    </div>
   </section>
 
+  <!-- ===== FEATURES ===== -->
+  <section id="features" class="features">
+    <div class="feature-card">
+      <h4>Structured Pruning</h4>
+      <p>GPU‑ & TPU‑friendly block‑sparse kernels deliver predictable speed‑ups without specialized hardware.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Unstructured Pruning</h4>
+      <p>Magnitude‑ and saliency‑based masks remove redundant weights, achieving up to 50× parameter reduction.</p>
+    </div>
+    <div class="feature-card">
+      <h4>1‑bit Quantization</h4>
+      <p>XNOR‑GEMM compatible weights with learned per‑channel scaling simplify inference and slash memory.</p>
+    </div>
+    <div class="feature-card">
+      <h4>Scratch Training</h4>
+      <p>Models converge directly in the compressed regime, eliminating catastrophic forgetting and fine‑tuning overhead.</p>
+    </div>
+  </section>
+
+  <!-- ===== CODE SNIPPET ===== -->
+  <section class="code-section">
+    <pre><code>$ pip install prismml
+$ prismml infer --model lean‑7b --input text.txt</code></pre>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
   <footer>© 2025 PrismML · All rights reserved</footer>
 </body>
 </html> 
