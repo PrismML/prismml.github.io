@@ -85,6 +85,10 @@
     .join-us{text-align:center;padding:4rem 1rem;background:var(--surface);opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
     .join-us.reveal{opacity:1;transform:none;}
     .join-us h2{margin-top:0;font-size:2rem;font-weight:700;color:var(--primary);}
+    .join-us .inner{max-width:700px;margin:0 auto;}
+    .join-us ul{list-style:none;padding:0;margin:1.5rem auto;text-align:left;}
+    .join-us li{display:flex;align-items:flex-start;margin:.5rem 0;}
+    .join-us li::before{content:"✔";color:var(--primary);font-weight:600;margin-right:.5rem;line-height:1;}
 
     /* ──────────  FOOTER  ────────── */
     footer{text-align:center;padding:3rem 1rem;font-size:.875rem;color:var(--text-muted);border-top:1px solid rgba(0,0,0,.05);}
@@ -160,13 +164,18 @@
 
   <!-- ===== JOIN US ===== -->
   <section id="join" class="join-us" data-reveal>
-    <h2>Join Us</h2>
-    <p>We're hiring researchers and engineers who love efficient ML.</p>
-    <p>We need jax experts who have scaled to thousands of TPUs/GPUs.</p>
-    <p>Familiarity with modern optimizers like Shampoo, PSGD, Muon, SAM is a plus.</p>
-    <p>Send a short note of why you think you'd be a good fit and your resume to <a href="mailto:tiny.prism.ml@gmail.com">tiny.prism.ml@gmail.com</a>.</p>
-    <div class="cta-buttons">
-      <a href="mailto:tiny.prism.ml@gmail.com" class="primary">Apply via Email</a>
+    <div class="inner">
+      <h2>Join Us</h2>
+      <p>PrismML is hiring researchers & engineers who are passionate about efficient ML.</p>
+      <ul class="requirements">
+        <li>Deep experience with <strong>JAX</strong> at massive scale (thousands of GPUs / TPUs)</li>
+        <li>Familiarity with advanced optimizers: Shampoo, PSGD, Muon, SAM</li>
+        <li>A love for pruning, quantization, or model compression research</li>
+      </ul>
+      <p>Send a brief note on why you're a great fit, plus your resume, to <a href="mailto:tiny.prism.ml@gmail.com">tiny.prism.ml@gmail.com</a>.</p>
+      <div class="cta-buttons">
+        <a href="mailto:tiny.prism.ml@gmail.com" class="primary">Apply via Email</a>
+      </div>
     </div>
   </section>
 
