@@ -51,8 +51,10 @@
     .nav-links a:hover{color:var(--primary);}
 
     /* ──────────  HERO  ────────── */
-    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-bottom-left-radius:50% 5%;border-bottom-right-radius:50% 5%;}
-    .hero h1{margin:0;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;}
+    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1rem 5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-bottom-left-radius:50% 5%;border-bottom-right-radius:50% 5%;
+      background-size:200% 200%;animation:gradientShift 10s ease-in-out infinite alternate;}
+    @keyframes gradientShift{0%{background-position:0% 50%;}100%{background-position:100% 50%;}}
+    .hero h1{background:linear-gradient(90deg,#fff,#dce6ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 4px rgba(0,0,0,.25);margin:0;font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;}
     .hero p{font-size:1.25rem;max-width:800px;margin:1.25rem 0 2.5rem;line-height:1.5;}
     .cta-buttons a{display:inline-block;margin:0 .5rem;padding:.75rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none;transition:background .2s,color .2s,box-shadow .2s;}
     .cta-buttons .primary{background:#fff;color:var(--primary);}
@@ -62,13 +64,15 @@
 
     /* ──────────  STATS  ────────── */
     .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;padding:4rem 1rem;background:var(--surface);}
-    .stat{text-align:center;max-width:180px;}
+    .stat{text-align:center;max-width:180px;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+    .stat.reveal{opacity:1;transform:none;}
     .stat h3{margin:0;font-size:2rem;font-weight:700;color:var(--primary);}
     .stat p{margin:.25rem 0 0;color:#555;}
 
     /* ──────────  FEATURES  ────────── */
     .features{max-width:1000px;margin:4rem auto;padding:0 1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
-    .feature-card{border:1px solid var(--card-border);border-radius:12px;padding:2rem;background:var(--card-bg);transition:box-shadow .2s,transform .2s;}
+    .feature-card{border:1px solid var(--card-border);border-radius:12px;padding:2rem;background:var(--card-bg);transition:box-shadow .2s,transform .2s;opacity:0;transform:translateY(20px);}
+    .feature-card.reveal{opacity:1;transform:none;}
     .feature-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.08);transform:translateY(-2px);}
     .feature-card h4{margin-top:0;color:var(--primary);font-weight:600;}
     .feature-card p{margin:.5rem 0 0;color:#555;}
@@ -78,7 +82,8 @@
     .code-section pre{background:#272822;color:#f8f8f2;display:inline-block;padding:1rem 1.5rem;border-radius:8px;font-family:'Courier New',monospace;font-size:1rem;margin:0;}
 
     /* ──────────  JOIN US  ────────── */
-    .join-us{text-align:center;padding:4rem 1rem;background:var(--surface);}
+    .join-us{text-align:center;padding:4rem 1rem;background:var(--surface);opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+    .join-us.reveal{opacity:1;transform:none;}
     .join-us h2{margin-top:0;font-size:2rem;font-weight:700;color:var(--primary);}
 
     /* ──────────  FOOTER  ────────── */
@@ -119,15 +124,15 @@
 
   <!-- ===== STATS ===== -->
   <section class="stats">
-    <div class="stat">
+    <div class="stat" data-reveal>
       <h3>50×</h3>
       <p>Parameter reduction</p>
     </div>
-    <div class="stat">
+    <div class="stat" data-reveal>
       <h3>1‑bit</h3>
       <p>Weight precision</p>
     </div>
-    <div class="stat">
+    <div class="stat" data-reveal>
       <h3>∞</h3>
       <p>Research possibilities</p>
     </div>
@@ -135,26 +140,26 @@
 
   <!-- ===== FEATURES ===== -->
   <section id="features" class="features">
-    <div class="feature-card">
+    <div class="feature-card" data-reveal>
       <h4>Structured Pruning</h4>
       <p>GPU‑ & TPU‑friendly block‑sparse kernels deliver predictable speed‑ups without specialized hardware.</p>
     </div>
-    <div class="feature-card">
+    <div class="feature-card" data-reveal>
       <h4>Unstructured Pruning</h4>
       <p>Magnitude‑ and saliency‑based masks remove redundant weights, achieving up to 50× parameter reduction.</p>
     </div>
-    <div class="feature-card">
+    <div class="feature-card" data-reveal>
       <h4>1‑bit Quantization</h4>
       <p>XNOR‑GEMM compatible weights with learned per‑channel scaling simplify inference and slash memory.</p>
     </div>
-    <div class="feature-card">
+    <div class="feature-card" data-reveal>
       <h4>Scratch Training</h4>
       <p>Models converge directly in the compressed regime, eliminating catastrophic forgetting and fine‑tuning overhead.</p>
     </div>
   </section>
 
   <!-- ===== JOIN US ===== -->
-  <section id="join" class="join-us">
+  <section id="join" class="join-us" data-reveal>
     <h2>Join Us</h2>
     <p>We're hiring researchers and engineers who love efficient ML.</p>
     <p>Send a short note and resume to <a href="mailto:tiny.prism.ml@gmail.com">tiny.prism.ml@gmail.com</a>.</p>
@@ -182,6 +187,13 @@
         updateIcon();
       });
     }
+
+    // Scroll reveal using IntersectionObserver
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('reveal'); observer.unobserve(e.target);} });
+    },{ threshold:0.15 });
+    document.querySelectorAll('[data-reveal]').forEach(el=>observer.observe(el));
   </script>
 </body>
 </html> 
