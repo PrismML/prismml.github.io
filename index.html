@@ -201,7 +201,7 @@ send a message to: tiny.prism.ml@gmail.com
     .gradient-text {
       position: relative;
       overflow: hidden;
-      color: white;
+      color: white !important;
       mix-blend-mode: screen;
     }
 
@@ -212,7 +212,7 @@ send a message to: tiny.prism.ml@gmail.com
       left: 50%;
       width: 150%;
       aspect-ratio: 1;
-      background: linear-gradient(90deg, var(--ui-primary), var(--ui-secondary));
+      background: linear-gradient(90deg, #fff, #dce6ff);
       mix-blend-mode: screen;
       animation: gradRotate 8s linear infinite;
       pointer-events: none;
@@ -308,9 +308,15 @@ send a message to: tiny.prism.ml@gmail.com
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--ui-primary), var(--ui-secondary));
+      background: linear-gradient(135deg, var(--ui-primary), var(--ui-secondary)), url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
       z-index: 0;
       overflow: hidden;
+      animation: backgroundMove 30s linear infinite;
+    }
+
+    @keyframes backgroundMove {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
     }
 
     .hero-tagline {
@@ -712,12 +718,22 @@ send a message to: tiny.prism.ml@gmail.com
         const textElements = document.querySelectorAll('[text-split]');
         textElements.forEach(element => {
           const words = element.querySelectorAll('.word');
+          if (words.length === 0) {
+            // Fallback if split doesn't work
+            element.style.opacity = 1;
+            return;
+          }
           words.forEach((word, index) => {
             word.style.transitionDelay = `${index * 0.1}s`;
             setTimeout(() => {
               word.style.opacity = 1;
-            }, 100);
+            }, 300);
           });
+        });
+      } else {
+        // Fallback if SplitType is not loaded
+        document.querySelectorAll('[text-split]').forEach(el => {
+          el.style.opacity = 1;
         });
       }
       
