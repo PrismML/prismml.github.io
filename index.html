@@ -541,6 +541,22 @@ send a message to: tiny.prism.ml@gmail.com
         margin-bottom: 2rem;
       }
     }
+
+    .wave {
+      display: block;
+      width: 100%;
+      height: 60px;
+      margin: 0;
+      pointer-events: none;
+    }
+    
+    .wave-top {
+      margin-top: -1px;
+    }
+    
+    .wave-bottom {
+      transform: rotate(180deg);
+    }
   </style>
 </head>
 <body>
@@ -594,9 +610,14 @@ send a message to: tiny.prism.ml@gmail.com
       <p>Research possibilities</p>
     </div>
   </section>
+  
+  <!-- ===== WAVE SEPARATOR ===== -->
+  <svg class="wave wave-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="fill:var(--ui-card);margin-bottom:-1px;">
+    <path d="M0 0h1440v26c-120 18-240 27-360 27S720 44 600 44 360 35 240 35 120 44 0 44Z"/>
+  </svg>
 
   <!-- ===== FEATURES ===== -->
-  <section id="features" class="features">
+  <section id="features" class="features" style="background-color:var(--ui-card);padding:2rem 0 4rem;">
     <div class="feature-card" data-reveal>
       <h4>Structured Pruning</h4>
       <p>GPU‑ & TPU‑friendly block‑sparse kernels deliver predictable speed‑ups without specialized hardware.</p>
@@ -615,8 +636,13 @@ send a message to: tiny.prism.ml@gmail.com
     </div>
   </section>
 
+  <!-- ===== WAVE SEPARATOR ===== -->
+  <svg class="wave wave-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="fill:var(--ui-card);margin-top:-1px;">
+    <path d="M0 0h1440v26c-120 18-240 27-360 27S720 44 600 44 360 35 240 35 120 44 0 44Z"/>
+  </svg>
+
   <!-- ===== JOIN US ===== -->
-  <section id="join" class="join-us" data-reveal>
+  <section id="join" class="join-us" data-reveal style="background-color:var(--ui-surface);padding-top:3rem;">
     <div class="inner">
       <h2>Join Us</h2>
       <p>PrismML is hiring researchers & engineers who are passionate about efficient ML.</p>
@@ -631,6 +657,11 @@ send a message to: tiny.prism.ml@gmail.com
       <a href="mailto:tiny.prism.ml@gmail.com" class="button">Apply via Email</a>
     </div>
   </section>
+
+  <!-- ===== WAVE SEPARATOR ===== -->
+  <svg class="wave wave-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="fill:var(--ui-card);">
+    <path d="M0 0h1440v26c-120 18-240 27-360 27S720 44 600 44 360 35 240 35 120 44 0 44Z"/>
+  </svg>
 
   <!-- ===== FOOTER ===== -->
   <footer>© 2025 PrismML · All rights reserved</footer>
