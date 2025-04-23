@@ -60,16 +60,11 @@ send a message to: tiny.prism.ml@gmail.com
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="prism.jpg" sizes="32x32">
-  <script src="https://unpkg.com/split-type"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
   <style>
     :root {
       --margin-page: 2em;
       --ui-primary: #2c66ff;
-      --ui-primary-rgb: 44,102,255;
       --ui-secondary: #6941c6;
-      --ui-secondary-rgb: 105,65,198;
       --ui-surface: #f8f9fb;
       --ui-card: #ffffff;
       --text-primary: #111111;
@@ -201,7 +196,7 @@ send a message to: tiny.prism.ml@gmail.com
     .gradient-text {
       position: relative;
       overflow: hidden;
-      color: white !important;
+      color: white;
       mix-blend-mode: screen;
     }
 
@@ -212,7 +207,7 @@ send a message to: tiny.prism.ml@gmail.com
       left: 50%;
       width: 150%;
       aspect-ratio: 1;
-      background: linear-gradient(90deg, #fff, #dce6ff);
+      background: linear-gradient(90deg, var(--ui-primary), var(--ui-secondary));
       mix-blend-mode: screen;
       animation: gradRotate 8s linear infinite;
       pointer-events: none;
@@ -308,15 +303,9 @@ send a message to: tiny.prism.ml@gmail.com
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--ui-primary), var(--ui-secondary)), url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      background: linear-gradient(135deg, var(--ui-primary), var(--ui-secondary));
       z-index: 0;
       overflow: hidden;
-      animation: backgroundMove 30s linear infinite;
-    }
-
-    @keyframes backgroundMove {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 100% 100%; }
     }
 
     .hero-tagline {
@@ -546,41 +535,6 @@ send a message to: tiny.prism.ml@gmail.com
         margin-bottom: 2rem;
       }
     }
-
-    /* Text splitting & animation */
-    [text-split] {opacity: 0;}
-    html.w-editor [text-split] {opacity: 1;}
-    .word {
-      overflow: hidden;
-      padding-bottom: 0.1em;
-      margin-bottom: -0.1em;
-      transform-origin: bottom;
-    }
-
-    .section {
-      padding: 5rem 1rem;
-      position: relative;
-    }
-
-    .section.bgteal {
-      background: var(--ui-surface);
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .sectiontitle {
-      font-size: 2.5rem;
-      line-height: 1.2;
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-
-    .containercenter {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
   </style>
 </head>
 <body>
@@ -599,7 +553,7 @@ send a message to: tiny.prism.ml@gmail.com
   <header class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <h1 data-w-id="main-heading" class="gradient-text float-animation" text-split>PrismML</h1>
+      <h1 data-w-id="main-heading" class="gradient-text float-animation">PrismML</h1>
       <div class="textanimatewrap">
         <div class="hero-tagline textfirst">Ultra-Efficient Foundation Models</div>
       </div>
@@ -613,72 +567,63 @@ send a message to: tiny.prism.ml@gmail.com
     <img src="prism.jpg" class="stardoodle _2" data-reveal alt="" style="width:60px;height:60px;border-radius:8px;">
   </header>
 
-  <main>
-    <!-- ===== WAVE SEPARATOR ===== -->
-    <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;height:60px;width:100%;margin-top:-1px;fill:var(--ui-surface);">
-      <path d="M0 0h1440v26c-120 18-240 27-360 27S720 44 600 44 360 35 240 35 120 44 0 44Z"/>
-    </svg>
+  <!-- ===== WAVE SEPARATOR ===== -->
+  <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;height:60px;width:100%;margin-top:-1px;fill:var(--surface);">
+    <path d="M0 0h1440v26c-120 18-240 27-360 27S720 44 600 44 360 35 240 35 120 44 0 44Z"/>
+  </svg>
 
-    <!-- ===== STATS ===== -->
-    <section class="stats section bgteal">
-      <div class="stat" data-reveal>
-        <h3>50×</h3>
-        <p>Parameter reduction</p>
-      </div>
-      <div class="stat" data-reveal>
-        <h3>1‑bit</h3>
-        <p>Weight precision</p>
-      </div>
-      <div class="stat" data-reveal>
-        <h3>∞</h3>
-        <p>Research possibilities</p>
-      </div>
-    </section>
+  <!-- ===== STATS ===== -->
+  <section class="stats">
+    <div class="stat" data-reveal>
+      <h3>50×</h3>
+      <p>Parameter reduction</p>
+    </div>
+    <div class="stat" data-reveal>
+      <h3>1‑bit</h3>
+      <p>Weight precision</p>
+    </div>
+    <div class="stat" data-reveal>
+      <h3>∞</h3>
+      <p>Research possibilities</p>
+    </div>
+  </section>
 
-    <!-- ===== FEATURES ===== -->
-    <section id="features" class="section">
-      <h2 class="sectiontitle"><span class="textred">Our</span> Technology</h2>
-      <div class="features containercenter">
-        <div class="feature-card" data-reveal>
-          <h4>Structured Pruning</h4>
-          <p>GPU‑ & TPU‑friendly block‑sparse kernels deliver predictable speed‑ups without specialized hardware.</p>
-        </div>
-        <div class="feature-card" data-reveal>
-          <h4>Unstructured Pruning</h4>
-          <p>Magnitude‑ and saliency‑based masks remove redundant weights, achieving up to 50× parameter reduction.</p>
-        </div>
-        <div class="feature-card" data-reveal>
-          <h4>1‑bit Quantization</h4>
-          <p>XNOR‑GEMM compatible weights with learned per‑channel scaling simplify inference and slash memory.</p>
-        </div>
-        <div class="feature-card" data-reveal>
-          <h4>Scratch Training</h4>
-          <p>Models converge directly in the compressed regime, eliminating catastrophic forgetting and fine‑tuning overhead.</p>
-        </div>
-      </div>
-      <img src="prism.jpg" class="squaredoodle _1" data-reveal alt="" style="width:60px;height:60px;border-radius:8px;position:absolute;top:15%;right:10%;opacity:0;transform:scale(1.2);transition:opacity 1s ease,transform 1s ease;z-index:-1;">
-    </section>
+  <!-- ===== FEATURES ===== -->
+  <section id="features" class="features">
+    <div class="feature-card" data-reveal>
+      <h4>Structured Pruning</h4>
+      <p>GPU‑ & TPU‑friendly block‑sparse kernels deliver predictable speed‑ups without specialized hardware.</p>
+    </div>
+    <div class="feature-card" data-reveal>
+      <h4>Unstructured Pruning</h4>
+      <p>Magnitude‑ and saliency‑based masks remove redundant weights, achieving up to 50× parameter reduction.</p>
+    </div>
+    <div class="feature-card" data-reveal>
+      <h4>1‑bit Quantization</h4>
+      <p>XNOR‑GEMM compatible weights with learned per‑channel scaling simplify inference and slash memory.</p>
+    </div>
+    <div class="feature-card" data-reveal>
+      <h4>Scratch Training</h4>
+      <p>Models converge directly in the compressed regime, eliminating catastrophic forgetting and fine‑tuning overhead.</p>
+    </div>
+  </section>
 
-    <!-- ===== JOIN US ===== -->
-    <section id="join" class="section bgteal">
-      <div class="join-us containercenter" data-reveal>
-        <div class="inner">
-          <h2>Join Us</h2>
-          <p>PrismML is hiring researchers & engineers who are passionate about efficient ML.</p>
-          <ul class="requirements">
-            <li>Deep experience with <strong>JAX</strong> at massive scale (thousands of GPUs / TPUs)</li>
-            <li>Familiarity with <strong>LLMs</strong> and <strong>Diffusion Models</strong></li>
-            <li>Experience with knowledge <strong>Distillation</strong></li>
-            <li>Hands‑on with advanced optimizers such as <strong>Shampoo</strong>, <strong>PSGD</strong>, <strong>Muon</strong>, <strong>SAM</strong></li>
-            <li>A love for pruning, quantization, or model compression research</li>
-          </ul>
-          <p>Send a brief note on why you're a great fit, plus your resume, to <a href="mailto:tiny.prism.ml@gmail.com">tiny.prism.ml@gmail.com</a>.</p>
-          <a href="mailto:tiny.prism.ml@gmail.com" class="button">Apply via Email</a>
-        </div>
-      </div>
-      <img src="prism.jpg" class="stardoodle _3" data-reveal alt="" style="width:40px;height:40px;border-radius:5px;position:absolute;bottom:10%;right:15%;opacity:0;transform:scale(1.2);transition:opacity 1s ease,transform 1s ease;z-index:-1;">
-    </section>
-  </main>
+  <!-- ===== JOIN US ===== -->
+  <section id="join" class="join-us" data-reveal>
+    <div class="inner">
+      <h2>Join Us</h2>
+      <p>PrismML is hiring researchers & engineers who are passionate about efficient ML.</p>
+      <ul class="requirements">
+        <li>Deep experience with <strong>JAX</strong> at massive scale (thousands of GPUs / TPUs)</li>
+        <li>Familiarity with <strong>LLMs</strong> and <strong>Diffusion Models</strong></li>
+        <li>Experience with knowledge <strong>Distillation</strong></li>
+        <li>Hands‑on with advanced optimizers such as <strong>Shampoo</strong>, <strong>PSGD</strong>, <strong>Muon</strong>, <strong>SAM</strong></li>
+        <li>A love for pruning, quantization, or model compression research</li>
+      </ul>
+      <p>Send a brief note on why you're a great fit, plus your resume, to <a href="mailto:tiny.prism.ml@gmail.com">tiny.prism.ml@gmail.com</a>.</p>
+      <a href="mailto:tiny.prism.ml@gmail.com" class="button">Apply via Email</a>
+    </div>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer>© 2025 PrismML · All rights reserved</footer>
@@ -705,35 +650,6 @@ send a message to: tiny.prism.ml@gmail.com
           document.documentElement.setAttribute('data-theme', next);
           localStorage.setItem('theme', next);
           updateIcon();
-        });
-      }
-      
-      // Text splitting animation
-      if (typeof SplitType !== 'undefined') {
-        const typeSplit = new SplitType('[text-split]', {
-          types: 'words,chars',
-          tagName: 'span'
-        });
-        
-        const textElements = document.querySelectorAll('[text-split]');
-        textElements.forEach(element => {
-          const words = element.querySelectorAll('.word');
-          if (words.length === 0) {
-            // Fallback if split doesn't work
-            element.style.opacity = 1;
-            return;
-          }
-          words.forEach((word, index) => {
-            word.style.transitionDelay = `${index * 0.1}s`;
-            setTimeout(() => {
-              word.style.opacity = 1;
-            }, 300);
-          });
-        });
-      } else {
-        // Fallback if SplitType is not loaded
-        document.querySelectorAll('[text-split]').forEach(el => {
-          el.style.opacity = 1;
         });
       }
       
