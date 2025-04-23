@@ -63,8 +63,11 @@ send a message to: tiny.prism.ml@gmail.com
   <style>
     :root {
       --margin-page: 2em;
-      --ui-primary: #2c66ff;
-      --ui-secondary: #6941c6;
+      --ui-primary: #3366ff;
+      --ui-secondary: #5233ff;
+      --ui-gradient-1: #3366ff;
+      --ui-gradient-2: #5233ff;
+      --ui-gradient-3: #8833ff;
       --ui-surface: #f8f9fb;
       --ui-card: #ffffff;
       --text-primary: #111111;
@@ -73,8 +76,11 @@ send a message to: tiny.prism.ml@gmail.com
     }
 
     [data-theme="dark"] {
-      --ui-primary: #7da2ff;
-      --ui-secondary: #9d7dff;
+      --ui-primary: #6384ff;
+      --ui-secondary: #8466ff;
+      --ui-gradient-1: #6384ff;
+      --ui-gradient-2: #8466ff;
+      --ui-gradient-3: #a566ff;
       --ui-surface: #1a1d24;
       --ui-card: #14171f;
       --text-primary: #f2f4ff;
@@ -195,23 +201,11 @@ send a message to: tiny.prism.ml@gmail.com
 
     .gradient-text {
       position: relative;
-      overflow: hidden;
       color: white;
-      mix-blend-mode: screen;
     }
 
     .gradient-text:AFTER {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 150%;
-      aspect-ratio: 1;
-      background: linear-gradient(90deg, var(--ui-primary), var(--ui-secondary));
-      mix-blend-mode: screen;
-      animation: gradRotate 8s linear infinite;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
+      display: none;
     }
 
     .textred {
@@ -294,17 +288,29 @@ send a message to: tiny.prism.ml@gmail.com
       text-align: center;
       padding: 6rem 1rem 5rem;
       position: relative;
+      overflow: hidden;
     }
 
     .hero-content {
       z-index: 1;
+      position: relative;
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--ui-primary), var(--ui-secondary));
+      background: var(--ui-primary);
       z-index: 0;
+      overflow: hidden;
+    }
+
+    .network-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
       overflow: hidden;
     }
 
@@ -552,6 +558,7 @@ send a message to: tiny.prism.ml@gmail.com
   <!-- ===== HERO ===== -->
   <header class="hero">
     <div class="hero-bg"></div>
+    <div class="network-bg"></div>
     <div class="hero-content">
       <h1 data-w-id="main-heading" class="gradient-text float-animation">PrismML</h1>
       <div class="textanimatewrap">
@@ -664,6 +671,94 @@ send a message to: tiny.prism.ml@gmail.com
       }, { threshold: 0.15 });
       
       document.querySelectorAll('[data-reveal], .stat, .feature-card, .stardoodle').forEach(el => observer.observe(el));
+      
+      // Network visualization for hero background
+      const createNetworkBg = () => {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'network-canvas';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.pointerEvents = 'none';
+        
+        const networkBg = document.querySelector('.network-bg');
+        if (networkBg) {
+          networkBg.appendChild(canvas);
+          
+          const ctx = canvas.getContext('2d');
+          const nodes = [];
+          const maxNodes = 100;
+          const connectionDistance = 150;
+          
+          // Create nodes
+          for (let i = 0; i < maxNodes; i++) {
+            nodes.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              radius: Math.random() * 1.5 + 0.5,
+              vx: Math.random() * 0.3 - 0.15,
+              vy: Math.random() * 0.3 - 0.15
+            });
+          }
+          
+          function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.beginPath();
+            for (let i = 0; i < nodes.length; i++) {
+              for (let j = i + 1; j < nodes.length; j++) {
+                const nodeA = nodes[i];
+                const nodeB = nodes[j];
+                const dx = nodeA.x - nodeB.x;
+                const dy = nodeA.y - nodeB.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < connectionDistance) {
+                  const opacity = 1 - (distance / connectionDistance);
+                  ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+                  ctx.lineWidth = 0.5;
+                  ctx.beginPath();
+                  ctx.moveTo(nodeA.x, nodeA.y);
+                  ctx.lineTo(nodeB.x, nodeB.y);
+                  ctx.stroke();
+                }
+              }
+            }
+            
+            // Draw and update nodes
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            nodes.forEach(node => {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+              ctx.fill();
+              
+              // Update position
+              node.x += node.vx;
+              node.y += node.vy;
+              
+              // Bounce off edges
+              if (node.x < 0 || node.x > canvas.width) node.vx = -node.vx;
+              if (node.y < 0 || node.y > canvas.height) node.vy = -node.vy;
+            });
+            
+            requestAnimationFrame(animate);
+          }
+          
+          animate();
+          
+          // Handle resize
+          window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+          });
+        }
+      };
+      
+      createNetworkBg();
     });
   </script>
 </body>
